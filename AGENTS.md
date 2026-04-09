@@ -26,7 +26,7 @@ bundle install
 rails db:create db:migrate
 
 # Start Rails server
-rails server
+bin/dev
 
 # Start Mailhog (already installed locally)
 mailhog

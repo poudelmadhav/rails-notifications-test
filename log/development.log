@@ -1,0 +1,24 @@
+  [1m[35m (42.9ms)[0m  [1m[35mCREATE DATABASE `rails_notification_test_development` DEFAULT CHARACTER SET `utf8mb4` /*application='RailsNotificationTest'*/[0m
+  [1m[35m (94.4ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='RailsNotificationTest'*/[0m
+  [1m[35m (12.8ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='RailsNotificationTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('6067890370964711730', 0) /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (9.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (3.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (9.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-04-09 10:47:58.208199', '2026-04-09 10:47:58.208204') /*application='RailsNotificationTest'*/[0m
+Migrating to CreatePosts (20260409104713)
+  [1m[35m (14.0ms)[0m  [1m[35mCREATE TABLE `posts` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `title` varchar(255), `content` text, `published` boolean, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260409104713') /*application='RailsNotificationTest'*/[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('6067890370964711730') /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='RailsNotificationTest'*/[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('6067890370964711730', 0) /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='RailsNotificationTest'*/[0m
+Migrating to CreateNoticedTables (20260409105012)
+  [1m[35m (35.4ms)[0m  [1m[35mCREATE TABLE `noticed_events` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `type` varchar(255), `record_type` varchar(255), `record_id` bigint, `params` json, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_noticed_events_on_record` (`record_type`, `record_id`)) /*application='RailsNotificationTest'*/[0m
+  [1m[35m (132.3ms)[0m  [1m[35mCREATE TABLE `noticed_notifications` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `type` varchar(255), `event_id` bigint NOT NULL, `recipient_type` varchar(255) NOT NULL, `recipient_id` bigint NOT NULL, `read_at` datetime, `seen_at` datetime, `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL, INDEX `index_noticed_notifications_on_event_id` (`event_id`), INDEX `index_noticed_notifications_on_recipient` (`recipient_type`, `recipient_id`)) /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260409105012') /*application='RailsNotificationTest'*/[0m
+Migrating to AddNotificationsCountToNoticedEvent (20260409105013)
+  [1m[35m (84.7ms)[0m  [1m[35mALTER TABLE `noticed_events` ADD `notifications_count` int /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (2.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20260409105013') /*application='RailsNotificationTest'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('6067890370964711730') /*application='RailsNotificationTest'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='RailsNotificationTest'*/[0m
