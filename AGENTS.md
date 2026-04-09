@@ -8,7 +8,7 @@ A Rails application for testing notifications (mail, browser) and Solid Queue.
 
 - Use one-line commits: `git commit -m "description"`
 - No prefixes like `feat:`, `add:`, `fix:`
-- Example: `git commit -m "initialize rails app with mysql and solid queue"`
+- Example: `git commit -m "Initialize rails app with mysql and solid queue"`
 
 ## Setup
 
@@ -30,17 +30,6 @@ rails server
 
 # Start Mailhog (already installed locally)
 mailhog
-
-# Run a single test
-rails test test/models/user_test.rb
-
-# Run specific test method
-rails test test/models/user_test.rb -n test_something
-```
-
-## Testing Order
-
-When modifying code: `lint -> typecheck -> test`
 
 ## Notes
 
