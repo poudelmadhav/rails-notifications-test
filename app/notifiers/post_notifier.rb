@@ -10,6 +10,10 @@ class PostNotifier < ApplicationNotifier
     config.method = "new_post"
   end
 
+  deliver_by :action_cable do |config|
+    config.channel = "NotificationsChannel"
+  end
+
   def message
     "New post published: #{params[:record].title}"
   end
