@@ -39,6 +39,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        PostNotifier.with(record: @post).deliver_later(User.all)
         format.html { redirect_to @post, notice: "Post was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @post }
       else
