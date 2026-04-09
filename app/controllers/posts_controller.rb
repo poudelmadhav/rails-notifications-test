@@ -25,6 +25,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        PostNotifier.with(record: @post).deliver_later(User.all) if @post.published?
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
