@@ -16,7 +16,8 @@ class PostNotifier < ApplicationNotifier
       message = {
         title: post.title,
         content: post.content,
-        published: post.published
+        published: post.published,
+        url: Rails.application.routes.url_helpers.post_url(post, host: "localhost", port: 3000)
       }
       Rails.logger.info "Message: #{message.inspect}"
       message

@@ -23,10 +23,17 @@ consumer.subscriptions.create("NotificationsChannel", {
     console.log("📨 Received notification:", data)
     // Show browser notification if permitted
     if (Notification.permission === "granted") {
-      new Notification(data.title, {
+      const notification = new Notification(data.title, {
         body: data.content,
         icon: "/icon.png" // You can change this to a valid icon path
       })
+
+      notification.onclick = () => {
+        window.focus()
+        if (data.url) {
+          window.location.href = data.url
+        }
+      }
     }
   }
 })
