@@ -10,6 +10,7 @@ class PostNotifier < ApplicationNotifier
 
   deliver_by :action_cable do |config|
     config.channel = "NotificationsChannel"
+    config.stream = "madhav-stream"
     config.message = -> do
       Rails.logger.info "=== Broadcasting notification via ActionCable ==="
       post = record
