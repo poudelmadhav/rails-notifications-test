@@ -25,7 +25,11 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        PostNotifier.with(record: @post).deliver_later(User.all) if @post.published?
+        if @post.published?
+          Rails.logger.info "=== Publishing notification for post: #{@post.title} ==="
+          PostNotifier.with(record: @post).deliver_later(User.all)
+          # ActionCable.server.broadcast('notifications', { title: 'Test', message: 'Hello world' })
+        end
         format.html { redirect_to @post, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
@@ -40,6 +44,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         PostNotifier.with(record: @post).deliver_later(User.all)
+        # ActionCable.server.broadcast('notifications', { title: 'Test', message: 'Hello world' })
         format.html { redirect_to @post, notice: "Post was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @post }
       else

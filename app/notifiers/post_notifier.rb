@@ -3,8 +3,6 @@
 # PostNotifier.with(record: @post, message: "New post").deliver(User.all)
 
 class PostNotifier < ApplicationNotifier
-  deliver_by :database
-
   deliver_by :email do |config|
     config.mailer = "PostMailer"
     config.method = "new_post"
@@ -12,20 +10,16 @@ class PostNotifier < ApplicationNotifier
 
   deliver_by :action_cable do |config|
     config.channel = "NotificationsChannel"
-    config.stream = "notifications"
-    config.message = :message
-    config.title = :title
-  end
-
-  def message
-    "New post published: #{params[:record].title}"
-  end
-
-  def title
-    "New Post"
-  end
-
-  def url
-    post_url(params[:record])
+    config.message = -> do
+      Rails.logger.info "=== Broadcasting notification via ActionCable ==="
+      post = record
+      message = {
+        title: post.title,
+        content: post.content,
+        published: post.published
+      }
+      Rails.logger.info "Message: #{message.inspect}"
+      message
+    end
   end
 end
