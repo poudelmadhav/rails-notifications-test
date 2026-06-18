@@ -40,14 +40,24 @@ export default class extends Controller {
 
   async saveToken(token) {
     const csrf = document.querySelector("[name='csrf-token']").content
-    const formData = new FormData()
-    formData.append("notification_token[token]", token)
-    formData.append("notification_token[platform]", "fcm")
+    const form = document.createElement("form")
+    form.method = "POST"
+    form.action = `/users/${this.userIdValue}/notification_tokens`
+    form.style.display = "none"
 
-    await fetch(`/users/${this.userIdValue}/notification_tokens`, {
-      method: "POST",
-      headers: { "X-CSRF-Token": csrf, Accept: "text/html" },
-      body: formData
-    })
+    const addField = (name, value) => {
+      const input = document.createElement("input")
+      input.type = "hidden"
+      input.name = name
+      input.value = value
+      form.appendChild(input)
+    }
+
+    addField("authenticity_token", csrf)
+    addField("notification_token[token]", token)
+    addField("notification_token[platform]", "fcm")
+
+    document.body.appendChild(form)
+    form.submit()
   }
 }
