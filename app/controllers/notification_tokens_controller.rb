@@ -19,6 +19,6 @@ class NotificationTokensController < ApplicationController
   end
 
   def notification_token_params
-    params.expect(notification_token: [:token, :platform])
+    params.expect(notification_token: [ :token, :platform ])
   end
 end

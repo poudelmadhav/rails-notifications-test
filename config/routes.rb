@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users do
-    resources :notification_tokens, only: [:create, :destroy]
+    resources :notification_tokens, only: [ :create, :destroy ]
   end
   resources :posts
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

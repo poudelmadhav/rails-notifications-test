@@ -4,5 +4,5 @@ class NotificationToken < ApplicationRecord
   enum :platform, { fcm: 0, apns: 1 }
 
   validates :token, presence: true
-  validates :token, uniqueness: { scope: [:user_id, :platform] }
+  validates :token, uniqueness: { scope: [ :user_id, :platform ] }
 end

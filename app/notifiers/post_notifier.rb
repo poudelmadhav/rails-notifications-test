@@ -31,7 +31,7 @@ class PostNotifier < ApplicationNotifier
     config.credentials = "config/fcm.json"
     config.device_tokens = -> { recipient.notification_tokens.where(platform: "fcm").pluck(:token) }
 
-    config.json = -> (device_token) do
+    config.json = ->(device_token) do
       post = record
       {
         message: {

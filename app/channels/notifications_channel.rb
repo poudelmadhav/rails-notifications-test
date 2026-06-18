@@ -1,6 +1,6 @@
 class NotificationsChannel < ApplicationCable::Channel
   def subscribed
-    stream_for 'madhav-stream'
+    stream_for "madhav-stream"
   end
 
   def unsubscribed
