@@ -8,6 +8,7 @@ class PostNotifier < ApplicationNotifier
     config.method = "new_post"
   end
 
+  # ActionCable setup for real-time browser notifications
   deliver_by :action_cable do |config|
     config.channel = "NotificationsChannel"
     config.stream = "madhav-stream"
@@ -22,6 +23,28 @@ class PostNotifier < ApplicationNotifier
       }
       Rails.logger.info "Message: #{message.inspect}"
       message
+    end
+  end
+
+  # 🤖🍏 Unified Mobile Setup (Firebase Cloud Messaging)
+  deliver_by :fcm do |config|
+    config.credentials = "config/fcm.json"
+    config.device_tokens = -> { recipient.notification_tokens.where(platform: "fcm").pluck(:token) }
+
+    config.json = -> (device_token) do
+      post = record
+      {
+        message: {
+          token: device_token,
+          notification: {
+            title: "New Post Published!",
+            body: post.title
+          },
+          data: {
+            post_id: post.id.to_s
+          }
+        }
+      }
     end
   end
 end

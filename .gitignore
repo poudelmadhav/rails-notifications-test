@@ -28,6 +28,7 @@ config/master.key
 # TODO Comment out these rules if environment variables can be committed
 .env
 .env*.local
+config/fcm.json
 
 ## Environment normalization:
 /.bundle
@@ -69,3 +70,5 @@ yarn-debug.log*
 /storage/*
 !/storage/.keep
 /public/uploads
+
+.DS_Store
