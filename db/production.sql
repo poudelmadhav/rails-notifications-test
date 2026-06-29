@@ -1,0 +1,3 @@
+CREATE DATABASE rails_notification_test_production_cache;
+CREATE DATABASE rails_notification_test_production_queue;
+CREATE DATABASE rails_notification_test_production_cable;
