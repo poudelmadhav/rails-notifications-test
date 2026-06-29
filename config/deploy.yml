@@ -41,7 +41,7 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
-    - RAILS_NOTIFICATION_TEST_DATABASE_PASSWORD
+    - MYSQL_ROOT_PASSWORD
   clear:
     # Run the Solid Queue Supervisor inside the web server's Puma process to do jobs.
     # When you start using multiple servers, you should split out job processing to a dedicated machine.
@@ -106,10 +106,7 @@ accessories:
     env:
       clear:
         MYSQL_ROOT_HOST: '%'
-        MYSQL_DATABASE: rails_notification_test_production
-        MYSQL_USER: rails_notification_test
       secret:
-        - MYSQL_PASSWORD
         - MYSQL_ROOT_PASSWORD
     files:
       # - config/mysql/production.cnf:/etc/mysql/my.cnf
