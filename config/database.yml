@@ -58,8 +58,9 @@ production:
   primary: &primary_production
     <<: *default
     database: rails_notification_test_production
-    username: rails_notification_test
-    password: <%= ENV["RAILS_NOTIFICATION_TEST_DATABASE_PASSWORD"] %>
+    username: root
+    password: <%= ENV["MYSQL_ROOT_PASSWORD"] %>
+    host: rails_notification_test-db
   cache:
     <<: *primary_production
     database: rails_notification_test_production_cache
