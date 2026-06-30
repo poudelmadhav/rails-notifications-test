@@ -8,7 +8,7 @@ image: rails_notification_test
 servers:
   web:
     hosts:
-      - kamal-test
+      - kamal-test # your ssh host or IP address
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -21,9 +21,9 @@ servers:
 #
 # Don't use this when deploying to multiple web servers (then you have to terminate SSL at your load balancer).
 #
-proxy:
-  ssl: true
-  host: kamal-test.auth-openidconnect.com
+# proxy:
+#   ssl: true
+#   host: app.example.com
 
 # Where you keep your container images.
 registry:
